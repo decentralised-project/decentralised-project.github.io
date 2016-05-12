@@ -74,10 +74,61 @@
 
         <div class="row">
             <div class="col-md-12">
-                <h3 id="build-from-source">Build Decentralised on Ubuntu</h3>
+                <h2>Build Decentralised on ubuntu</h2>
                 <div class="shaded-box">
-                    TODO!
+                    <p>
+                        These build instructions were tested as they were written on a clean installation of ubuntu 16.04 LTS 64-bit running on VirtualBox.
+                    </p>
+
+                    <p>
+                        Tip: Before you start setting up your build environment, check you're running 64-bit ubuntu if you're planning on building for Android later.
+                    </p>
                 </div>
+
+                <h3>Preparing the environment</h3>
+                <div class="shaded-box">
+                    <ul>
+                        <li>
+                            Open a terminal and type ...
+<pre>
+sudo apt update
+</pre>
+                        </li>
+                        <li>
+                            If you're running ubuntu in VirtualBox, in the <strong>Devices</strong> menu at the top of the screen, select
+                            "Insert Guest Additions CD image..." to install the plugin, and enable clipboard sharing etc. Then restart VM.
+                        </li>
+                        <li>
+                            Install the build tools, type ...
+<pre>
+sudo apt-get install build-essential automake libtool cmake-qt-gui git mercurial
+</pre>
+                        </li>
+                        <li>
+                            Install the dependencies, type ...
+<pre>
+sudo apt-get install libfreetype6-dev libfreeimage-dev libzzip-dev libxrandr-dev libxaw7-dev freeglut3-dev libglew-dev libgl1-mesa-dev libglu1-mesa-dev libpoco-dev libboost-all-dev
+</pre>
+                        </li>
+                    </ul>
+                </div>
+
+                <h3>Build/Install Ogre</h3>
+                <div class="shaded-box">
+                    <ul>
+                        <li>Open a terminal and type ...
+<pre>
+mkdir Decentralised
+cd Decentralised
+hg clone https://bitbucket.org/sinbad/ogre ogre -r v1-9
+mkdir ogre-build
+cmake-gui
+</pre>
+                        </li>
+                    </ul>
+                </div>
+
+
             </div>
         </div>
 
