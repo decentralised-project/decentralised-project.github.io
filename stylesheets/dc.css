@@ -8,6 +8,9 @@ h3,
 h4 {
   font-family: 'Share Tech Mono';
 }
+.shaded-box li > ul > li:last-child {
+  margin-bottom: 10px;
+}
 h3 {
   background-image: url('../images/title-left.png');
   background-repeat: no-repeat;
@@ -95,6 +98,12 @@ h3 {
     background-image: url('../images/nav-reflect-selected.jpg');
     background-repeat: repeat-x;
   }
+}
+.line {
+  background-image: url('../images/box-top-border.png');
+  background-repeat: repeat-x;
+  height: 3px;
+  margin-bottom: 30px;
 }
 .shaded-box {
   background-image: url('../images/box-top-border.png');
