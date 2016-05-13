@@ -107,7 +107,9 @@ sudo apt-get install build-essential automake libtool cmake-qt-gui git mercurial
                         <li>
                             Install the dependencies, type ...
 <pre>
-sudo apt-get install libfreetype6-dev libfreeimage-dev libzzip-dev libxrandr-dev libxaw7-dev freeglut3-dev libglew-dev libgl1-mesa-dev libglu1-mesa-dev libpoco-dev libboost-all-dev
+sudo apt-get install libfreetype6-dev libfreeimage-dev libzzip-dev libxrandr-dev \
+   libxaw7-dev freeglut3-dev libglew-dev libgl1-mesa-dev libglu1-mesa-dev libpoco-dev \
+   libboost-all-dev libois-dev nvidia-cg-toolkit libgles1-mesa-dev
 </pre>
                         </li>
                     </ul>
@@ -116,7 +118,8 @@ sudo apt-get install libfreetype6-dev libfreeimage-dev libzzip-dev libxrandr-dev
                 <h3>Build/Install Ogre</h3>
                 <div class="shaded-box">
                     <ul>
-                        <li>Open a terminal and type ...
+                        <li>
+                            Open a terminal and type ...
 <pre>
 mkdir Decentralised
 cd Decentralised
@@ -125,9 +128,81 @@ mkdir ogre-build
 cmake-gui
 </pre>
                         </li>
+                        <li>
+                            Select <i>~/Decentralised/ogre</i> as the source, and <i>~/Decentralised/ogre-build</i> as the target directory.
+                        </li>
+                        <li>
+                            Hit the <strong>Configure</strong> button in the CMake interface.
+                        </li>
+                        <li>
+                            Find and change the following CMake variables to the values shown below:
+                            <ul>
+                                <li>
+                                    OGRE_BUILD_SAMPLES - <strong>UNTICK</strong>
+                                </li>
+                                <li>
+                                    OGRE_BUILD_TOOLS - <strong>UNTICK</strong>
+                                </li>
+                                <li>
+                                    OGRE_INSTALL_SAMPLES - <strong>UNTICK</strong>
+                                </li>
+                                <li>
+                                    OGRE_INSTALL_TOOLS - <strong>UNTICK</strong>
+                                </li>
+                                <li>
+                                    OGRE_STATIC - <strong>TICK</strong>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            Hit the <strong>Configure</strong> button again, and then the <strong>Generate</strong> button.
+                        </li>
+                        <li>
+                            Close cmake-gui, and in the terminal window cd to the ogre-build folder.
+                        </li>
+                        <li>
+                            Type ...
+<pre>
+make
+sudo make install
+</pre>
+                        </li>
+                        <li>
+                            Now we haz static Ogre3D installed.
+                        </li>
                     </ul>
                 </div>
-
+                <h3>Build dc-viewer</h3>
+                <div class="shaded-box">
+                    <ul>
+                        <li>
+                            In a terminal window, cd to ~/Decentralised folder, and type ...
+<pre>
+git clone https://github.com/decentralised-project/dc-viewer dc-viewer
+mkdir dc-viewer-build
+cmake-gui
+</pre>
+                        </li>
+                        <li>
+                            Select <i>~/Decentralised/dc-viewer</i> as the source, and <i>~/Decentralised/dc-viewer-build</i> as the target directory.
+                        </li>
+                        <li>
+                            Hit the <strong>Configure</strong> button, and then the <strong>Generate</strong> button.
+                        </li>
+                        <li>
+                            Close cmake-gui, and in the terminal window cd to the dc-viewer-build folder.
+                        </li>
+                        <li>
+                            Type ...
+<pre>
+make
+</pre>
+                        </li>
+                        <li>
+                            If all went well, you will find the viewer executable file at ~/Decentralised/build/Decentralised
+                        </li>
+                    </ul>
+                </div>
 
             </div>
         </div>
