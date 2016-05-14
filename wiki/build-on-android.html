@@ -74,10 +74,159 @@
 
         <div class="row">
             <div class="col-md-12">
-                <h3 id="build-from-source">Build Decentralised on Android</h3>
+                <h2>Build Decentralised on Android</h2>
                 <div class="shaded-box">
-                    TODO!
+                    <p>
+                        These build instructions were tested as they were written on an installation of ubuntu 16.04 LTS 64-bit running on VirtualBox.
+                    </p>
+
+                    <p>
+                        Before you start building for Android, follow the <a href="/wiki/build-on-ubuntu.html" title="ubuntu build instructions">ubuntu build instructions</a>
+                        to ensure the environment is set up correctly.
+                    </p>
+
+                    <p>
+                        <strong>IMPORTANT</strong>: Check you are running 64-bit ubuntu, 32-bit will fail.
+                    </p>
                 </div>
+
+                <h3>Preparing the environment</h3>
+                <div class="shaded-box">
+                    <ul>
+                        <li>
+                            The following step doesn't appear to work with Firefox at the time of writing, so you might need to
+                            install <a href="https://apps.ubuntu.com/cat/applications/chromium-browser/" title="Chromium Browser">Chromium Browser</a>.
+                        </li>
+                        <li>
+                            Download <strong>Android Studio</strong> for Linux from
+                            <a href="https://developer.android.com/sdk" title="Android Studio and SDK">https://developer.android.com/sdk</a>
+                            <br />
+                            Follow the <a href="https://developer.android.com/sdk/installing">installation instructions</a> that appear after the download has started.
+                            <br />
+                            <i>Tip: If the apt-get install for 64-bit systems fails, try removing lib32bz2-1.0 from the command.</i>
+                        </li>
+                        <li>
+                            Open Android Studio, go to Configure > SDK Manager and install Android API 10.
+                        </li>
+                        <li>
+                            Download <strong>Android Native Development Kit (NDK)</strong> for Linux from
+                            <a href="https://developer.android.com/ndk/downloads" title="Android NDK">https://developer.android.com/ndk/downloads</a>
+                        </li>
+                        <li>
+                            Extract the NDK zip file into a folder next to where you installed Android Studio. eg...
+<pre>
+sudo unzip android-ndk-r11c-linux-x86_64.zip /usr/local/android-ndk
+</pre>
+                        </li>
+                        <li>
+                            Set the environment variables below (altering the paths if necessary, to where you installed the SDK and NDK)
+                            <br />
+                            Note: You can see where the SDK was installed, by opening Android Studio > Configure > SDK Manager
+<pre>
+export ANDROID_SDK=/home/[YourUsername]/Android/Sdk
+export ANDROID_NDK=/usr/local/android-ndk/android-ndk-r11c
+export PATH=%ANDROID_SDK%/tools:%ANDROID_SDK%/platform-tools:%ANDROID_NDK%:$PATH
+</pre>
+                        </li>
+                    </ul>
+                </div>
+
+                <h3>Build Ogre Dependencies</h3>
+                <div class="shaded-box">
+                    <ul>
+                        <li>
+                            Assuming you still have a <i>~/Decentralised</i> folder from following the
+                            <a href="/wiki/build-on-ubuntu.html" title="ubuntu build instructions">ubuntu build instructions</a>,
+                            open a terminal and cd into the folder.
+                        </li>
+                        <li>
+                            The Ogre dependencies have to be built for Android, so clone a copy of the source code by typing ...
+<pre>
+hg clone https://bitbucket.org/cabalistic/ogredeps ogredeps
+</pre>
+                        </li>
+                        <li>
+                            cd into the ogredeps/build directory, and execute CMake as below.
+                            <br />
+                            Notes:
+                            <ul>
+                                <li>
+                                    ANDROID_ABI is usually armeabi-v7a
+                                </li>
+                                <li>
+                                    ANDROID_NATIVE_API_LEVEL should match whatever API level you downloaded via the SDK utilities
+                                </li>
+                                <li>
+                                    ANDROID_TOOLCHAIN_NAME should match the toolchain (i.e., build system) you wish to use from %ANDROID_NDK%\toolchains
+                                </li>
+                            </ul>
+<pre>
+cd ogredeps
+mkdir build
+cd build
+cmake -G "Unix Makefiles" -DCMAKE_TOOLCHAIN_FILE="../cmake/android.toolchain.cmake" \
+   -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=10 \
+   -DANDROID_TOOLCHAIN_NAME=arm-linux-androideabi-4.9 ..
+make
+sudo make install
+</pre>
+                        </li>
+                    </ul>
+                </div>
+
+                <h3>Build Ogre</h3>
+                <div class="shaded-box">
+                    <ul>
+                        <li>
+                            Open a terminal and cd into the <i>~/Decentralised</i> folder.
+                        </li>
+                        <li>
+                            You should already have the Ogre source from the ubuntu build, but if not, run the command below.
+<pre>
+hg clone https://bitbucket.org/sinbad/ogre ogre -r v1-9
+</pre>
+                        </li>
+                        <li>
+                            The file <i>ogre/CMake/toolchain/android.toolchain.cmake</i> is older than the one in the ogredeps project.
+                            <br />
+                            Copy the file from <i>ogredeps/cmake/android.toolchain.cmake</i> and replace the older Ogre version, to avoid errors.
+                        </li>
+                        <li>
+                            Copy the file <i>%ANDROID_NDK%/sources/android/cpufeatures/cpu-features.h</i>
+                            <br/>
+                            to <i>%ANDROID_NDK%/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/user/include</i>
+                        </li>
+                        <li>
+                            cd into the ogre folder, create a build folder, and cd into it, as below.
+<pre>
+cd ogre
+mkdir build
+cd build
+</pre>
+                        </li>
+                        <li>
+                            Run CMake as before, but this time including the path to the installed ogre dependencies.
+<pre>
+cmake -G "Unix Makefiles" -DCMAKE_TOOLCHAIN_FILE="../CMake/toolchain/android.toolchain.cmake" \
+   -DOGRE_DEPENDENCIES_DIR="%ANDROID_NDK%/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/user" \
+   -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=10 -DANDROID_TOOLCHAIN_NAME=arm-linux-androideabi-4.9 ..
+make
+</pre>
+                        </li>
+                        <li>
+                            TODO: Fix for DummyJNI link issue.
+                        </li>
+                        <li>
+                            Download <strong>Apache Ant</strong> from <a href="http://ant.apache.org/bindownload.cgi">http://ant.apache.org/bindownload.cgi</a>.
+                            <br/>
+                            Unzip, copy the folder to /usr/local and add the bin folder to the PATH environment variable.
+<pre>
+export PATH=/usr/local/apache-ant/bin:$PATH    
+</pre>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
         </div>
 

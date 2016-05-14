@@ -17,7 +17,7 @@ h4 {
 h3 {
   background-image: url('../images/title-left.png');
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 32px;
   padding-left: 40px;
 }
 pre {
@@ -58,6 +58,18 @@ pre {
   top: 0;
   right: 0;
   border: 0;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: black;
+}
+.navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle:visited,
+.navbar-default .navbar-toggle {
+  border-color: black;
+  background-color: transparent;
+}
+.navbar-default .navbar-toggle:hover {
+  background-color: #017179;
 }
 .navbar-default {
   background-color: #03b6c3;
