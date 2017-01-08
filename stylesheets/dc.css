@@ -1,7 +1,12 @@
 ﻿body {
-  background-image: url('../images/background.jpg');
+  background-color: #045a89;
   color: #c5d4d5;
   padding-bottom: 60px;
+  background-size: cover;
+}
+.row {
+  background-size: cover;
+  background-position: center;
 }
 h2,
 h3,
@@ -25,39 +30,48 @@ pre {
   color: white;
   word-break: break-all;
   word-wrap: break-word;
-  background-color: #017179;
+  background-color: #004a61;
   border: 1px solid #000;
   border-radius: 4px;
   margin-top: 10px;
 }
-.title-block {
+.lead {
+  font-size: 21px;
+}
+.title-block > div {
+  padding: 20px;
+}
+.title-block > div img {
+  float: left;
+  margin: 0 20px 20px 0;
+}
+.title-block > div > div {
   text-transform: uppercase;
-  font-size: 3.0em;
-  text-align: center;
-  color: #A1EAF0;
+  font-size: 3.2em;
+  color: rgba(0, 0, 0, 0.7);
   font-weight: bold;
-  margin-top: 0;
-  display: table;
-  margin: 0 auto;
+  margin: 0;
+  font-family: 'Share Tech Mono';
+  float: left;
 }
-.title-block div {
-  display: table-row;
+.title-block > div > div p {
+  color: white;
 }
-.title-block span {
-  display: table-cell;
-  vertical-align: middle;
-}
-.header {
-  height: 133px;
-  background-image: url('../images/header.png');
-  background-position: top center;
-  background-repeat: no-repeat;
+.title-block > div > div h1 {
+  padding: 0;
+  margin: 0;
 }
 .git-corner {
   position: absolute;
   top: 0;
   right: 0;
   border: 0;
+}
+.hero {
+  background: url('/images/hero-banner.jpg') no-repeat;
+  background-size: cover;
+  min-height: 200px;
+  border-radius: 5px;
 }
 .navbar-default .navbar-toggle .icon-bar {
   background-color: black;
@@ -80,49 +94,9 @@ pre {
   margin-top: 25px;
   border: 0;
 }
-@media (max-width: 767px) {
-  .navbar-nav {
-    background-color: #e7e7e7;
-    z-index: 100;
-    border-bottom-right-radius: 30px;
-  }
-  .navbar-default .navbar-nav > li > a {
-    color: black;
-  }
-  .navbar-default .navbar-nav > .active > a:hover,
-  .navbar-default .navbar-nav > .active > a {
-    color: white;
-    background-color: #cc3e01;
-  }
-  .title-block {
-    font-size: 2.0em;
-  }
-}
-@media (min-width: 768px) {
-  .navbar {
-    min-height: 20px;
-  }
-  .navbar-default .navbar-nav > li > a {
-    padding: 2px 10px 0 10px;
-    background-color: transparent;
-    display: inline-block;
-    height: 25px;
-    min-width: 200px;
-    text-align: center;
-    background-image: none;
-    color: #404040;
-    text-decoration: none;
-  }
-  .navbar-default .navbar-nav > .active > a:hover,
-  .navbar-default .navbar-nav > .active > a {
-    color: white;
-    background-color: #cc3e01;
-    display: inline-block;
-    min-width: 200px;
-    text-align: center;
-    background-image: url('../images/nav-reflect-selected.jpg');
-    background-repeat: repeat-x;
-  }
+.navbar {
+  /*margin-left: -15px;
+    margin-right: -15px;*/
 }
 .line {
   background-image: url('../images/box-top-border.png');
@@ -170,5 +144,59 @@ pre {
 .margin-center {
   margin-left: auto;
   margin-right: auto;
+}
+@media (max-width: 767px) {
+  .navbar {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .navbar-nav {
+    background-color: #e7e7e7;
+    z-index: 100;
+    border-bottom-right-radius: 30px;
+  }
+  .navbar-default .navbar-nav > li > a {
+    color: black;
+  }
+  .navbar-default .navbar-nav > .active > a:hover,
+  .navbar-default .navbar-nav > .active > a {
+    color: white;
+    background-color: #cc3e01;
+  }
+}
+@media (max-width: 550px) {
+  .lead {
+    font-size: 16px;
+    font-weight: normal;
+  }
+}
+@media (min-width: 768px) {
+  .navbar {
+    min-height: 20px;
+  }
+  .navbar-default .navbar-nav > li > a {
+    padding: 2px 10px 0 10px;
+    background-color: transparent;
+    display: inline-block;
+    height: 25px;
+    min-width: 200px;
+    text-align: center;
+    background-image: none;
+    color: #404040;
+    text-decoration: none;
+  }
+  .navbar-default .navbar-nav > .active > a:hover,
+  .navbar-default .navbar-nav > .active > a {
+    color: white;
+    background-color: #cc3e01;
+    display: inline-block;
+    min-width: 200px;
+    text-align: center;
+    background-image: url('../images/nav-reflect-selected.jpg');
+    background-repeat: repeat-x;
+  }
+  .lead {
+    font-size: 21px;
+  }
 }
 /*# sourceMappingURL=dc.css.map */
